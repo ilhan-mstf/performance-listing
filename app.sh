@@ -8,6 +8,6 @@ done < "$1"
 
 DATE=$(date +"%Y-%m-%d")
 
-mkdir reports/$DATE
-mv *.html reports/$DATE/
-mv *.json reports/$DATE/
+mkdir -p reports/$DATE
+mv ./*.html ./reports/$DATE/
+mv ./*.json ./reports/$DATE/
