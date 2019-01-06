@@ -3,6 +3,7 @@ import csv
 import glob
 import json
 
+
 def read_file(file_name):
   with open(file_name) as f:
     return json.load(f)
@@ -21,8 +22,8 @@ def extract_fields(data, fields):
   return row
 
 
-headers = ['fetchTime', 'finalUrl', 'first-contentful-paint', 
-           'first-meaningful-paint', 'speed-index', 'time-to-first-byte',
+headers = ['fetchTime', 'finalUrl', 'time-to-first-byte', 
+           'first-contentful-paint', 'first-meaningful-paint', 'speed-index', 
            'first-cpu-idle', 'interactive', 'total-byte-weight', 'file_name']
 
 with open('reports/summary.csv', 'w') as csv_file:
