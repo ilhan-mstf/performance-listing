@@ -24,10 +24,64 @@
     <h1>Which one delivers best performance?</h1>
     <p>This website provides a list of performance result of front-end frameworks. A script that runs Lighthouse generates the reports.</p>
   </header>
-  <section id="reports">
-    <p>Results will be listed very soon.</p>
+  <section id="report">
+    <table>
+      <thead id="reportHead">
+
+      </thead>
+      <tbody id="reportBody">
+
+      </tbody>
+      <tfoot id="reportFoot">
+
+      </tfoot>
+    </table>
   </section>
-  <footer>Related project: <a href=""></a></footer>
+  <footer>Related project: <a href="https://github.com/ilhan-mstf/which-one-delivers-best-performance">https://github.com/ilhan-mstf/which-one-delivers-best-performance</a></footer>
+  
+  <script>
+    function parse(csvText) {
+      console.log(csvText);
+      let lines = csvText.split(/\r\n|\n/);
+      return lines.map(x => x.split(','));
+    }
+
+    function render(data) {
+      console.log(data);
+      renderHead(data.shift())
+      renderBody(data)
+    }
+
+    function renderHead(data) {
+      let $reportHead = document.getElementById('reportHead')
+      let $tr = document.createElement("tr");
+      for (let i = 0, ii = data.length; i != ii; i++) {
+        let $td = document.createElement("td");
+        $td.innerText = data[i]
+        $tr.appendChild($td);
+      }
+      $reportHead.appendChild($tr);
+    }
+
+    function renderBody(data) {
+      let $reportBody = document.getElementById('reportBody')
+      for (let i = 0, ii = data.length; i != ii; i++) {
+        let $tr = document.createElement("tr");
+        for (let j = 0, jj = data[i].length; j != jj; j++) {
+          let $td = document.createElement("td");
+          $td.innerText = data[i][j]
+          $tr.appendChild($td);
+        }
+        $reportBody.appendChild($tr);
+      }
+    }
+
+    fetch("../reports/summary.csv").then(function(response) {
+      return response.ok ? response.text() : Promise.reject(response.status);
+    }).then(function(text) {
+      return render(parse(text));
+    });
+  </script>
 </body>
 
 </html>
