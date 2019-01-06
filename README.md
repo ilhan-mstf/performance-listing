@@ -3,6 +3,9 @@ Lighthouse is an [open-source](https://github.com/GoogleChrome/lighthouse), auto
 
 If you want to add your website to the listing please open an issue. If you don't want to be listed your website in this listing please drop an email to ilhan.mstf@gmail.com with your work email.
 
-# TODO
+# TODOs
 - ~~Create a csv file from reports.json~~
-- Create a html page to show the results
+- ~~Create a html page to show the results~~
+- Make human readable rendered data
+- Improve websites UI
+- Find and add sample websites of frameworks.
