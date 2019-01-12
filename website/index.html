@@ -40,6 +40,60 @@
   <footer>Related project: <a href="https://github.com/ilhan-mstf/which-one-delivers-best-performance">https://github.com/ilhan-mstf/which-one-delivers-best-performance</a></footer>
   
   <script>
+    const messages = {
+      "fetchTime": "Date",
+      "finalUrl": "Site",
+      "time-to-first-byte": "First byte",
+      "first-contentful-paint": "First contentful paint",
+      "first-meaningful-paint": "First meaningful paint",
+      "speed-index": "Speed index",
+      "first-cpu-idle": "First cpu idle",
+      "interactive": "Interactive",
+      "total-byte-weight": "Total byte weight",
+      "file_name": ""
+    }
+
+    const converter = {
+      "fetchTime": function (val) {
+        return val.substr(0,10);
+      },
+      "finalUrl": function (val) {
+        return val.replace(/https/g, "").replace(/http/g, "").replace(/:/g, "").replace(/\//g, "").replace(/www./g, "");
+      },
+      "time-to-first-byte": function (val) {
+        return (Number(val) / 1000).toFixed(2) + "s";
+      },
+      "first-contentful-paint": function (val) {
+        return (Number(val) / 1000).toFixed(2) + "s";
+      },
+      "first-meaningful-paint": function (val) {
+        return (Number(val) / 1000).toFixed(2) + "s";
+      },
+      "speed-index": function (val) {
+        return (Number(val) / 1000).toFixed(2) + "s";
+      },
+      "first-cpu-idle": function (val) {
+        return (Number(val) / 1000).toFixed(2) + "s";
+      },
+      "interactive": function (val) {
+        return (Number(val) / 1000).toFixed(2) + "s";
+      },
+      "total-byte-weight": function (val) {
+        val = Number(val);
+        if (val / 1024 < 1000) {
+          return (val / 1024).toFixed(2) + "KB";
+        } else { 
+          return (val / (1024 * 1024)).toFixed(2) + "MB";
+        }
+      },
+      "file_name": function (val) {
+        let $reportLink = document.createElement('a');
+        $reportLink.href = "../" + val.replace("json", "html");
+        $reportLink.innerHTML = "Details";
+        return $reportLink
+      }
+    }
+
     function parse(csvText) {
       console.log(csvText);
       let lines = csvText.split(/\r\n|\n/);
@@ -48,8 +102,9 @@
 
     function render(data) {
       console.log(data);
-      renderHead(data.shift())
-      renderBody(data)
+      let header = data.shift()
+      renderHead(header)
+      renderBody(header, data)
     }
 
     function renderHead(data) {
@@ -57,19 +112,24 @@
       let $tr = document.createElement("tr");
       for (let i = 0, ii = data.length; i != ii; i++) {
         let $td = document.createElement("td");
-        $td.innerText = data[i]
+        $td.innerText = messages[data[i]]
         $tr.appendChild($td);
       }
       $reportHead.appendChild($tr);
     }
 
-    function renderBody(data) {
+    function renderBody(header, data) {
       let $reportBody = document.getElementById('reportBody')
       for (let i = 0, ii = data.length; i != ii; i++) {
         let $tr = document.createElement("tr");
         for (let j = 0, jj = data[i].length; j != jj; j++) {
           let $td = document.createElement("td");
-          $td.innerText = data[i][j]
+          let response = converter[header[j]](data[i][j])
+          if (typeof response === "string") {
+            $td.innerText = response
+          } else {
+            $td.appendChild(response)
+          }
           $tr.appendChild($td);
         }
         $reportBody.appendChild($tr);

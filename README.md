@@ -6,6 +6,6 @@ If you want to add your website to the listing please open an issue. If you don'
 # TODOs
 - ~~Create a csv file from reports.json~~
 - ~~Create a html page to show the results~~
-- Make human readable rendered data
+- ~~Make human readable rendered data~~
 - Improve websites UI
 - Find and add sample websites of frameworks.
