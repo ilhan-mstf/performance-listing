@@ -83,7 +83,8 @@
         return val.substr(0,10);
       },
       "finalUrl": function (val) {
-        return val.replace(/https/g, "").replace(/http/g, "").replace(/:/g, "").replace(/\//g, "").replace(/www./g, "");
+        val = val.replace(/https:\/\//g, "").replace(/http:\/\//g, "").replace("www.", "")
+        return val.substr(0, val.indexOf('/'));
       },
       "time-to-first-byte": function (val) {
         return (Number(val) / 1000).toFixed(2) + "s";
