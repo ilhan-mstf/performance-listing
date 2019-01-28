@@ -1,3 +1,2 @@
-https://www.google.com
 https://getbootstrap.com/docs/4.1/examples/product/
 https://facebook.github.io/create-react-app/
