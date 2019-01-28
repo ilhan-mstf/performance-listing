@@ -114,7 +114,7 @@
       },
       "file_name": function (val) {
         let $reportLink = document.createElement('a');
-        $reportLink.href = "../" + val.replace("json", "html");
+        $reportLink.href = "/" + val.replace("json", "html");
         $reportLink.innerHTML = "Details";
         return $reportLink
       }
