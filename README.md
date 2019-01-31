@@ -9,3 +9,5 @@ If you want to add your website to the listing please open an issue. If you don'
 - ~~Make human readable rendered data~~
 - Improve websites UI
 - Find and add sample websites of frameworks.
+- Create different listings for ecommerce sites, startups etc.
+- Implement web-ui with different libraries; react, vue, elm etc.
